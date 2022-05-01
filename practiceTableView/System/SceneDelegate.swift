@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  practiceTableView
 //
-//  Created by Prathima Juturu Chinna on 01/05/22.
+//  Created by Shreyan on 01/05/22.
 //
 
 import UIKit
