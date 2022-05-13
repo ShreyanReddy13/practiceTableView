@@ -52,6 +52,19 @@ class TableViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let findRowIndex  = tableView.indexPathForSelectedRow else
+        {
+            return
+        }
+        if segue.identifier == "segueforTablerow"
+        {
+            let destVC = segue.destination as? InfoTableViewController
+            let row = findRowIndex.row
+            destVC?.rowIndex = row
+        }
+    }
 
 
     /*

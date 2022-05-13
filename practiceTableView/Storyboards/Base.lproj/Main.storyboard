@@ -43,7 +43,7 @@
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="person.circle.fill" catalog="system"/>
                                             <connections>
-                                                <segue destination="NYe-KL-JFQ" kind="show" id="hkp-QO-eP0"/>
+                                                <segue destination="NYe-KL-JFQ" kind="show" identifier="segueforTablerow" id="PMr-8b-lfX"/>
                                             </connections>
                                         </button>
                                     </subviews>

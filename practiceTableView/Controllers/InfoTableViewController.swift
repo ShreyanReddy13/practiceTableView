@@ -8,11 +8,39 @@
 import UIKit
 
 class InfoTableViewController: UITableViewController {
-let infoQuestions = ["Father Name - ","Mother Name - "]
-    let ansInfo = ["XXX", "YYY"]
+    var infoQuestions: [String] = []
+    var ansInfo: [String] = []
+    var rowIndex: Int = 0
+    
+    struct StdDetails : Decodable
+    {
+        let motherName : String
+        let mailID : String
+    }
+    
+    func withJsonDecoder()
+    {
+        let stdDetailList = Bundle.main.path(forResource: "studentinfo", ofType: "json")
+        do
+        {
+            let jsonData = try String(contentsOfFile: stdDetailList ?? "").data(using: .utf8)
+            let json = try JSONDecoder().decode([StdDetails].self, from: jsonData!)
+            
+            for i in json{
+                //populate the array
+                infoQuestions.append(i.motherName)
+                ansInfo.append(i.mailID)
+            }
+        }
+        catch{
+            print(error.localizedDescription)
+            print(String(describing: error))
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        withJsonDecoder()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -30,14 +58,14 @@ let infoQuestions = ["Father Name - ","Mother Name - "]
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "info", for: indexPath) as! InfoTableViewCell
         
-        cell.questionsInfo.text = infoQuestions[indexPath.row]
-        cell.answerInfo.text = ansInfo[indexPath.row]
+        cell.questionsInfo.text = infoQuestions[rowIndex]
+        cell.answerInfo.text = ansInfo[rowIndex]
 
     
 
